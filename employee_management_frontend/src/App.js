@@ -1,12 +1,11 @@
 import './App.css';
+import EmployeeForm from './components/EmployeeForm';
 
 function App() {
   return (
-    <>
-    <header>
-      <h1>Employee Management syastem </h1>
-    </header>
-    </>
+    <div className="App">
+    <EmployeeForm />
+    </div>
   );
 }
 
