@@ -1,12 +1,14 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+/venv
+
 
 # dependencies
-/node_modules
+/employee_management_frontend/node_modules
+
 /.pnp
 .pnp.js
 
-# testing
-/coverage
+/employee_management_backend/db.sqlite3
 
 # production
 /build
