@@ -1,0 +1,36 @@
+.dashboard {
+    width: 250px; /* Adjust the width as needed */
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--gray); /* Light background color */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .dashboard h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .dashboard ul li {
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  .dashboard ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .dashboard ul li a:hover {
+    color: #007bff; /* Hover color */
+  }
+  

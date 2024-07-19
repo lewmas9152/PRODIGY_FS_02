@@ -1,3 +1,20 @@
+:root {
+  --primary-blue: #007bff; 
+  --secondary-blue: #0056b3; 
+  --light-gray: #f8f9fa; 
+  --gray: #6c757d; 
+  --dark-gray: #343a40; 
+  --background: #e9ecef; 
+  --border: #ced4da; 
+  --success-green: #28a745; 
+  --warning-yellow: #ffc107; 
+  --danger-red: #dc3545; 
+  --success-green-dark: #218838; 
+  --warning-yellow-dark: #e0a800; 
+  --danger-red-dark: #c82333; 
+}
+
+
 .App {
   text-align: center;
 }
@@ -5,4 +22,8 @@
 
 h1 {
   color: white;
+}
+
+.main-content {
+  margin-left: 270px;
 }
