@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../styles/LeaveManagement.css';
 
 const LeaveManagement = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -13,13 +12,14 @@ const LeaveManagement = () => {
   };
 
   return (
-    <div className="leave-management">
+    <div className="management">
       <h2>Leave Management</h2>
-      <button className="add-leave-btn" onClick={openModal}>Request Leave</button>
+      <button className="add-btn" onClick={openModal}>Request Leave</button>
 
-      <table className="leave-table">
+      <table className="table">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Employee Name</th>
             <th>Leave Type</th>
             <th>Start Date</th>
@@ -29,6 +29,7 @@ const LeaveManagement = () => {
         </thead>
         <tbody>
           <tr>
+            <td>1</td>
             <td>John Doe</td>
             <td>Annual Leave</td>
             <td>2024-07-01</td>

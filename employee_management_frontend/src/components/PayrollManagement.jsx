@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../styles/PayrollManagement.css';
 
 const PayrollManagement = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -13,13 +12,14 @@ const PayrollManagement = () => {
   };
 
   return (
-    <div className="payroll-management">
+    <div className="management">
       <h2>Payroll Management</h2>
-      <button className="add-payroll-btn" onClick={openModal}>Add Payroll</button>
+      <button className="add-btn" onClick={openModal}>Add Payroll</button>
 
-      <table className="payroll-table">
+      <table className="table">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Employee Name</th>
             <th>Month</th>
             <th>Salary</th>
@@ -28,6 +28,7 @@ const PayrollManagement = () => {
         </thead>
         <tbody>
           <tr>
+            <td>1</td>
             <td>John Doe</td>
             <td>July</td>
             <td>$5000</td>

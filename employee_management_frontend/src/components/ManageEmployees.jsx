@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../styles/ManageEmployees.css';
 
 const ManageEmployees = () => {
   const [employees, setEmployees] = useState([
@@ -16,10 +15,10 @@ const ManageEmployees = () => {
   };
 
   return (
-    <div className='manage-employees'>
+    <div className='management'>
       <h2>Manage Employees</h2>
-      <button className='add-employee-btn' onClick={handleAddEmployee}>Add Employee</button>
-      <table className='employee-table'>
+      <button className='add-btn' onClick={handleAddEmployee}>Add Employee</button>
+      <table className='table'>
         <thead>
           <tr>
             <th>ID</th>
@@ -36,7 +35,7 @@ const ManageEmployees = () => {
               <td>{emp.name}</td>
               <td>{emp.department}</td>
               <td>{emp.email}</td>
-              <td>
+              <td className='action_bts'>
                 <button>Edit</button>
                 <button>Delete</button>
               </td>
