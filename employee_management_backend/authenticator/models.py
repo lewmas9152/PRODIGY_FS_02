@@ -23,7 +23,7 @@ class Department(models.Model):
 
 # model for employee
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, default=None)
@@ -34,7 +34,7 @@ class Employee(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.username
+        return self.username
 
 # model for leave 
 class Leave(models.Model):
@@ -58,6 +58,6 @@ class Leave(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.employee.user.username} - {self.leave_type}"
+        return f"{self.employee.username} - {self.leave_type}"
         
         

@@ -21,7 +21,7 @@ class LeaveSerializer(serializers.ModelSerializer):
 class EmployeeSerializer(serializers.ModelSerializer):
     department = DepartmentSerializer(read_only=True)
     role = RoleSerializer(read_only=True)
-    user = serializers.StringRelatedField()
+
     class Meta:
         model = Employee
-        fields = [ 'id', 'user', 'email', 'role', 'department', 'salary', 'phone', 'address', 'date_hired', 'updated_at']
+        fields = [ 'id', 'username', 'email', 'role', 'department', 'salary', 'phone', 'address', 'date_hired', 'updated_at']
