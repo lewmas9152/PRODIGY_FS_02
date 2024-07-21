@@ -10,13 +10,15 @@ const ManageEmployees = () => {
   const [employees, setEmployees] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [newEmployee, setNewEmployee] = useState({
-    name: "",
+    username: "",
     department: "",
     role: "",
     email: "",
+    phone: "",
   });
   const [departments, setDepartments] = useState([]);
   const [roles, setRoles] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const getEmployees = async () => {
@@ -60,14 +62,18 @@ const ManageEmployees = () => {
 
   const handleAddEmployee = async (e) => {
     e.preventDefault();
+    setError("");
+    console.log("Request Payload", newEmployee);
     try {
       const { data } = await createEmployee(newEmployee);
       console.log("Employee Added", data);
       setEmployees([...employees, data]);
       setShowModal(false);
     } catch (error) {
-      console.log(error);
+      console.log("Error creating employee",error);
+      setError("Error creating employee");
     }
+
   };
 
   const handleChange = (e) => {
@@ -96,8 +102,8 @@ const ManageEmployees = () => {
             <tr key={emp.id}>
               <td>{emp.id}</td>
               <td>{emp.username}</td>
-              <td>{emp.department.department}</td>
-              <td>{emp.role.role}</td>
+              <td>{emp.department ? emp.department.department:"Null"}</td>
+              <td>{emp.role ? emp.role.role: "Null"}</td>
               <td>{emp.email}</td>
               <td className="action_bts">
                 <button>Edit</button>
@@ -120,8 +126,8 @@ const ManageEmployees = () => {
                 Name:
                 <input
                   type="text"
-                  name="name"
-                  value={newEmployee.name}
+                  name="username"
+                  value={newEmployee.username}
                   onChange={handleChange}
                 />
               </label>
@@ -164,6 +170,16 @@ const ManageEmployees = () => {
                   value={newEmployee.email}
                   onChange={handleChange}
                 />
+              </label>
+              <label>
+                Phone:
+                <input
+                  type="text"
+                  name="phone"
+                  value={newEmployee.phone}
+                  onChange={handleChange} 
+                />
+                
               </label>
               <button type="submit">Add Employee</button>
             </form>
