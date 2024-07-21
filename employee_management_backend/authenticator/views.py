@@ -23,7 +23,7 @@ class EmployeeViewSet(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, pk):
+    def patch(self, request, pk):
         employee = Employee.objects.get(pk=pk)
         serializer = EmployeeSerializer(employee, data=request.data)
         if serializer.is_valid():

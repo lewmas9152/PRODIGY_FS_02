@@ -75,6 +75,10 @@ h1 {
   gap: 10px;
 }
 
+.danger {
+  margin-right: 10px;
+}
+
 .modal {
   position: fixed;
   top: 0;

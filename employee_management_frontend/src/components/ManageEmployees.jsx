@@ -4,11 +4,14 @@ import {
   createEmployee,
   fetchDepartments,
   fetchRoles,
+  deleteEmployee,
 } from "../services/api";
 
 const ManageEmployees = () => {
   const [employees, setEmployees] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [employeeToDelete, setEmployeeToDelete] = useState(null);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [newEmployee, setNewEmployee] = useState({
     username: "",
     department: "",
@@ -80,6 +83,51 @@ const ManageEmployees = () => {
     setNewEmployee({ ...newEmployee, [e.target.name]: e.target.value });
   };
 
+  const handleDeleteClick = (emp) => {
+    setEmployeeToDelete(emp);
+    setShowConfirmModal(true);
+  };
+
+  const ConfirmModal = ({ show, onClose, onConfirm }) => {
+    if (!show) {
+      return null;
+    }
+  
+    return (
+      <div className="modal">
+        <div className="modal-content">
+          <span className="close" onClick={onClose}>
+            &times;
+          </span>
+          <h3>Confirm Deletion</h3>
+          <p>Are you sure you want to delete this employee?</p>
+          <div className="danger_bts">
+          <button onClick={onConfirm} className="danger">Yes</button>
+          <button onClick={onClose}>No</button>
+          </div>
+          
+        </div>
+      </div>
+    );
+  };
+  
+  
+
+  const handleDeleteEmployee = async () => {
+    if (employeeToDelete) {
+    try {
+      const { data } = await deleteEmployee(employeeToDelete.id);
+      console.log("Employee Deleted", data);
+      setEmployees(employees.filter((emp) => emp.id !== employeeToDelete.id));
+      setShowConfirmModal(false);
+      setEmployeeToDelete(null);
+    } catch (error) {
+      console.log("Error deleting employee", error);
+      setError("Error deleting employee");
+    }
+  }
+  }
+
   return (
     <div className="management">
       <h2>Manage Employees</h2>
@@ -107,7 +155,7 @@ const ManageEmployees = () => {
               <td>{emp.email}</td>
               <td className="action_bts">
                 <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => handleDeleteClick(emp)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -186,8 +234,16 @@ const ManageEmployees = () => {
           </div>
         </div>
       )}
+
+      <ConfirmModal
+        show={showConfirmModal}
+        onClose={() => setShowConfirmModal(false)}
+        onConfirm={handleDeleteEmployee}
+      />
     </div>
   );
 };
+
+
 
 export default ManageEmployees;
