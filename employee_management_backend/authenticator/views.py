@@ -7,16 +7,18 @@ from rest_framework import status,generics
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated,AllowAny
 
 
 
 class RegisterView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
 
 
 class LoginView(APIView):
-    def post(self,request):
+     def post(self,request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         username = serializer.validated_data['username']
@@ -36,6 +38,7 @@ class LoginView(APIView):
         
             
 class EmployeeViewSet(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request,pk=None):
         if pk:   
             employee = Employee.objects.get(pk=pk)
@@ -66,7 +69,7 @@ class EmployeeViewSet(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class RoleViewSet(APIView):
-
+    permission_classes = [IsAuthenticated]
     def get(self, request,pk=None):
         if pk:
             role = Role.objects.get(pk=pk)
@@ -98,7 +101,7 @@ class RoleViewSet(APIView):
     
 
 class DepartmentViewSet(APIView):
-
+    permission_classes = [IsAuthenticated]
     def get(self, request, pk=None):
         if pk:
             department = Department.objects.get(pk=pk)
@@ -129,6 +132,7 @@ class DepartmentViewSet(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class LeaveViewSet(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, pk=None):
         if pk:
             leave = Leave.objects.get(pk=pk)
