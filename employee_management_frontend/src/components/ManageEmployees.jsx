@@ -5,11 +5,14 @@ import {
   fetchDepartments,
   fetchRoles,
   deleteEmployee,
+  updateEmployee,
 } from "../services/api";
 
 const ManageEmployees = () => {
   const [employees, setEmployees] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [employeeToEdit, setEmployeeToEdit] = useState(null);
   const [employeeToDelete, setEmployeeToDelete] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [newEmployee, setNewEmployee] = useState({
@@ -83,12 +86,38 @@ const ManageEmployees = () => {
     const { name, value } = e.target;
     setNewEmployee({ ...newEmployee, [name]: value });
   };
+
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEmployeeToEdit({ ...employeeToEdit, [name]: value });
+  };
+
+  const handleEditEmployee = async (e) => {
+    e.preventDefault();
+    setError("");
+    console.log("Request Payload", employeeToEdit);
+    try {
+      const { data } = await updateEmployee(employeeToEdit.id, employeeToEdit);
+      console.log("Employee Updated", data);
+      setEmployees(employees.map(emp => emp.id === data.id ? data : emp));
+      setShowEditModal(false);
+    } catch (error) {
+      console.log("Error updating employee", error);
+      setError("Error updating employee");
+    }
+  };
+
   
   
 
   const handleDeleteClick = (emp) => {
     setEmployeeToDelete(emp);
     setShowConfirmModal(true);
+  };
+
+  const handleEditClick = (emp) => {
+    setEmployeeToEdit(emp);
+    setShowEditModal(true);
   };
 
   const ConfirmModal = ({ show, onClose, onConfirm }) => {
@@ -157,7 +186,7 @@ const ManageEmployees = () => {
               <td>{emp.role ? emp.role.role: "Null"}</td>
               <td>{emp.email}</td>
               <td className="action_bts">
-                <button>Edit</button>
+                <button onClick={()=> handleEditClick(emp)}>Edit</button>
                 <button onClick={() => handleDeleteClick(emp)}>Delete</button>
               </td>
             </tr>
@@ -237,6 +266,78 @@ const ManageEmployees = () => {
           </div>
         </div>
       )}
+
+{showEditModal && (
+  <div className="modal">
+    <div className="modal-content">
+      <span className="close" onClick={() => setShowEditModal(false)}>
+        &times;
+      </span>
+      <h3>Edit Employee</h3>
+      <form onSubmit={handleEditEmployee}>
+        <label>
+          Name:
+          <input
+            type="text"
+            name="username"
+            value={employeeToEdit.username}
+            onChange={handleEditChange}
+          />
+        </label>
+        <label>
+          Department:
+          <select
+            name="department_id"
+            value={employeeToEdit.department_id}
+            onChange={handleEditChange}
+          >
+            <option value="">Select Department</option>
+            {departments.map((dept) => (
+              <option key={dept.id} value={dept.id}>
+                {dept.department}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Role:
+          <select
+            name="role_id"
+            value={employeeToEdit.role_id}
+            onChange={handleEditChange}
+          >
+            <option value="">Select Role</option>
+            {roles.map((role) => (
+              <option key={role.id} value={role.id}>
+                {role.role}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={employeeToEdit.email}
+            onChange={handleEditChange}
+          />
+        </label>
+        <label>
+          Phone:
+          <input
+            type="text"
+            name="phone"
+            value={employeeToEdit.phone}
+            onChange={handleEditChange}
+          />
+        </label>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+)}
+
 
       <ConfirmModal
         show={showConfirmModal}

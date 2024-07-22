@@ -12,7 +12,7 @@ API.interceptors.request.use((req) => {
 export const fetchEmployees = () => API.get('/employees');
 export const fetchEmployee = (id) => API.get(`/employees/${id}`);
 export const createEmployee = (employeeData) => API.post('/employees/', employeeData);
-export const updateEmployee = (id, employeeData) => API.patch(`/employees/${id}`, employeeData);
+export const updateEmployee = (id, employeeData) => API.patch(`/employees/${id}/`, employeeData);
 export const deleteEmployee = (id) => API.delete(`/employees/${id}`);
 export const fetchDepartments = () => API.get('/departments');
 export const fetchRoles = () => API.get('/roles');
