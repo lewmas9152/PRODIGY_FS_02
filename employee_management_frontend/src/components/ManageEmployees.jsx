@@ -14,8 +14,8 @@ const ManageEmployees = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [newEmployee, setNewEmployee] = useState({
     username: "",
-    department: "",
-    role: "",
+    department_id: "",
+    role_id: "",
     email: "",
     phone: "",
   });
@@ -80,8 +80,11 @@ const ManageEmployees = () => {
   };
 
   const handleChange = (e) => {
-    setNewEmployee({ ...newEmployee, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setNewEmployee({ ...newEmployee, [name]: value });
   };
+  
+  
 
   const handleDeleteClick = (emp) => {
     setEmployeeToDelete(emp);
@@ -182,8 +185,8 @@ const ManageEmployees = () => {
               <label>
                 Department:
                 <select
-                  name="department"
-                  value={newEmployee.department}
+                  name="department_id"
+                  value={newEmployee.department_id}
                   onChange={handleChange}
                 >
                   <option value="">Select Department</option>
@@ -198,8 +201,8 @@ const ManageEmployees = () => {
               <label>
                 Role:
                 <select
-                  name="role"
-                  value={newEmployee.role}
+                  name="role_id"
+                  value={newEmployee.role_id}
                   onChange={handleChange}
                 >
                   <option value="">Select Role</option>

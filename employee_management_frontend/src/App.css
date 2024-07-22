@@ -108,33 +108,48 @@ h1 {
   color: var(--danger-red);
 }
 
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 form {
   display: flex;
   flex-direction: column;
 }
 
 form label {
-  margin-bottom: 10px;
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
   color: var(--dark-gray);
 }
 
-form input {
-  padding: 8px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-form button {
-  background-color: var(--primary-blue);
-  color: #fff;
-  border: none;
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content select {
+  width: calc(100% - 22px);
   padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
-form button:hover {
-  background-color: var(--secondary-blue);
+.modal-content button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-content button[type="submit"]:hover {
+  background-color: #45a049;
 }
 

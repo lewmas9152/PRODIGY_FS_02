@@ -19,8 +19,8 @@ class LeaveSerializer(serializers.ModelSerializer):
         fields = [ 'id', 'employee', 'leave_type', 'start_date', 'end_date', 'reason', 'status', 'created_at', 'updated_at']
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    department_id = serializers.PrimaryKeyRelatedField(queryset=Department.objects.all(),allow_null=True, required=False)
-    role_id = serializers.PrimaryKeyRelatedField(queryset=Role.objects.all(),allow_null=True, required=False)
+    department_id = serializers.PrimaryKeyRelatedField(queryset=Department.objects.all(),source='department',allow_null=True, required=False)
+    role_id = serializers.PrimaryKeyRelatedField(queryset=Role.objects.all(),source='role', allow_null=True, required=False)
     department = DepartmentSerializer(read_only=True)
     role = RoleSerializer(read_only=True)
 
